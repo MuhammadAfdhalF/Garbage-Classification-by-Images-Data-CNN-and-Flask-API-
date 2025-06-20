@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request, jsonify # Import jsonify
+from flask import Flask, render_template, request, jsonify
 import numpy as np
 from PIL import Image
 import tensorflow as tf
 from tensorflow.keras.applications.vgg16 import preprocess_input
 import os
 from werkzeug.utils import secure_filename
-import uuid # Import uuid for unique filenames
+import uuid
 
 app = Flask(__name__)
 
@@ -16,8 +16,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Load model
 model = tf.keras.models.load_model("final_model_33.h5")
-
-# Ukuran input yang sesuai untuk VGG16
 target_size = (224, 224)
 
 # Mapping output ke nama label
@@ -29,23 +27,37 @@ waste_labels = {
     5: 'trash'
 }
 
+# === ROUTES ===
+
 @app.route('/')
 def index():
-    # Pastikan prediction dan image_url diinisialisasi untuk tampilan awal
     return render_template('index.html', prediction=None, image_url=None)
 
-# --- Endpoint untuk Unggahan Gambar Statis (dari form HTML) ---
+@app.route('/picture')
+def picture():
+    return render_template('picture.html')
+
+@app.route('/live_camera')
+def live_camera():
+    return render_template('live_camera.html')
+# Endpoint untuk form upload di picture.html
 @app.route('/predict', methods=['POST'])
 def predict_static_image():
     if 'image' not in request.files:
-        return render_template('index.html', prediction="No image uploaded", image_url=None)
+        print("⛔ Tidak ada file dengan nama 'image' di form.")
+        return render_template('picture.html', prediction="No image uploaded", image_url=None)
 
     file = request.files['image']
-
     if file.filename == '':
-        return render_template('index.html', prediction="No selected image", image_url=None)
+        print("⛔ File yang diupload tidak memiliki nama.")
+        return render_template('picture.html', prediction="No selected image", image_url=None)
 
-    # Nama file untuk unggahan statis bisa tetap sama, tidak perlu unik per detik
+    # Validasi ekstensi file
+    allowed_extensions = {'jpg', 'jpeg', 'png', 'bmp'}
+    if not ('.' in file.filename and file.filename.rsplit('.', 1)[1].lower() in allowed_extensions):
+        print("⛔ Ekstensi file tidak valid:", file.filename)
+        return render_template('picture.html', prediction="Invalid file type", image_url=None)
+
     filename = secure_filename(file.filename)
     filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     file.save(filepath)
@@ -58,68 +70,58 @@ def predict_static_image():
         img_array = preprocess_input(img_array)
         img_array = np.expand_dims(img_array, axis=0)
 
-        # Prediksi
+        # Prediksi menggunakan model
         pred = model.predict(img_array)[0]
         class_index = np.argmax(pred) + 1
         class_name = waste_labels.get(class_index, "Unknown")
 
-        # Opsional: Jika ingin menghapus file setelah diproses untuk upload biasa juga
-        # os.remove(filepath)
+        print("✅ Prediksi berhasil:", class_name)
+        print("🖼️  Gambar disimpan di:", filepath)
 
-        return render_template('index.html', prediction=class_name, image_url=filepath)
+        return render_template('picture.html', prediction=class_name, image_url=filepath)
 
     except Exception as e:
-        print(f"Error processing uploaded image: {e}")
-        # Hapus file jika terjadi error saat pemrosesan
+        print(f"❌ Error saat memproses gambar: {e}")
         if os.path.exists(filepath):
             os.remove(filepath)
-        return render_template('index.html', prediction=f"Error processing image: {str(e)}", image_url=None)
+        return render_template('picture.html', prediction=f"Error processing image: {str(e)}", image_url=None)
 
-# --- Endpoint Baru untuk Live Camera (selalu mengembalikan JSON) ---
+
+# Endpoint untuk live camera API (return JSON)
 @app.route('/live_predict', methods=['POST'])
 def live_predict():
     if 'image' not in request.files:
         return jsonify({'error': 'No image part in the request'}), 400
 
     file = request.files['image']
-
     if file.filename == '':
         return jsonify({'error': 'No selected image file'}), 400
 
-    # Dapatkan ekstensi file asli
     file_ext = os.path.splitext(secure_filename(file.filename))[1]
-
-    # Generate nama file unik menggunakan UUID untuk menghindari race condition
     unique_filename = str(uuid.uuid4()) + file_ext
     filepath = os.path.join(app.config['UPLOAD_FOLDER'], unique_filename)
-
-    file.save(filepath) # Simpan frame dengan nama unik
+    file.save(filepath)
 
     try:
-        # Proses gambar
         img = Image.open(filepath).convert("RGB")
         img = img.resize(target_size)
         img_array = np.array(img)
         img_array = preprocess_input(img_array)
         img_array = np.expand_dims(img_array, axis=0)
 
-        # Prediksi
         pred = model.predict(img_array)[0]
         class_index = np.argmax(pred) + 1
         class_name = waste_labels.get(class_index, "Unknown")
 
-        # Hapus file setelah diproses untuk menghindari penumpukan
         os.remove(filepath)
-
-        return jsonify({'prediction': class_name}) # Selalu kembalikan JSON
+        return jsonify({'prediction': class_name})
 
     except Exception as e:
         print(f"Error processing live image: {e}")
-        # Pastikan file unik juga dihapus jika terjadi error
         if os.path.exists(filepath):
             os.remove(filepath)
         return jsonify({'error': f'Failed to process live image: {str(e)}'}), 500
 
-
+# === RUN ===
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,152 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Page Title</title> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        /* Basic Reset & Body Styling (sesuaikan dengan tema Anda) */
-        body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: #0e0e1a; /* Warna latar belakang utama Anda */
-            color: white;
-        }
-
-        /* Header Styling */
-        .header {
-            background-color: #dbe4c7; /* Warna latar belakang header */
-            padding: 10px 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Efek bayangan ringan */
-            color: #333; /* Warna teks default untuk header */
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-        }
-
-        .header-logo {
-            width: 50px; /* Ukuran kotak logo */
-            height: 50px;
-            background-color: #e0e0e0; /* Warna placeholder untuk logo */
-            border: 1px solid #ccc;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 15px;
-            font-size: 12px;
-            color: #666;
-        }
-
-        .header-title h1 {
-            margin: 0;
-            font-size: 24px;
-            color: #2c3e50; /* Warna judul "Eco Lens" */
-        }
-
-        .header-title p {
-            margin: 0;
-            font-size: 14px;
-            color: #555; /* Warna slogan */
-        }
-
-        .header-nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            gap: 25px; /* Jarak antar item menu */
-        }
-
-        .header-nav li {
-            position: relative; /* Diperlukan untuk indikator active */
-        }
-
-        .header-nav a {
-            text-decoration: none;
-            color: #4CAF50; /* Warna teks menu default */
-            font-weight: 600;
-            padding: 8px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        /* Styling untuk menu aktif */
-        .header-nav a.active {
-            background-color: #558B2F; /* Warna hijau gelap seperti di gambar */
-            color: white;
-        }
-
-        .header-nav a:hover:not(.active) {
-            background-color: rgba(85, 139, 47, 0.2); /* Sedikit highlight saat hover */
-            color: #558B2F;
-        }
-
-        /* Tambahan: Responsive adjustments */
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 15px;
-            }
-            .header-nav ul {
-                flex-direction: column;
-                gap: 10px;
-                width: 100%;
-                margin-top: 15px;
-            }
-            .header-nav li {
-                width: 100%;
-            }
-            .header-nav a {
-                display: block;
-                text-align: center;
-                padding: 10px;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <header class="header">
-        <div class="header-left">
-            <div class="header-logo">
-                Logo
-            </div>
-            <div class="header-title">
-                <h1>Eco Lens</h1>
-                <p>"Detection Garbage Classification"</p>
+<nav class="navbar navbar-expand-lg" style="background-color: #E5EEDA;">
+    <div class="container-fluid px-4 py-2">
+        <div class="d-flex align-items-center" style="max-height: 60px;">
+            <img src="{{ url_for('static', filename='uploads/image/logo_no_bg_eco_lens.png') }}" alt="Logo Eco Lens"
+                style="width: 70px; height: 70px; object-fit: contain; margin-right: 15px;">
+            <div class="d-flex flex-column">
+                <span class="fw-bold fs-5 text-dark m-0">Eco Lens</span>
+                <small class="text-muted" style="margin-top: -4px;">“Detection Garbage Classification”</small>
             </div>
         </div>
-        <nav class="header-nav">
-            <ul>
-                <li><a href="/" id="nav-home">Home</a></li>
-                <li><a href="/picture" id="nav-picture">Picture</a></li>
-                <li><a href="/live_camera" id="nav-live-camera">Live Camera</a></li>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end me-5" id="navbarNav">
+            <ul class="navbar-nav gap-4">
+                <li class="nav-item">
+                    <a class="nav-link px-3 py-1 fw-semibold rounded" id="nav-home" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3 py-1 fw-semibold rounded" id="nav-picture" href="/picture">Picture</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3 py-1 fw-semibold rounded" id="nav-live-camera" href="/live_camera">Live
+                        Camera</a>
+                </li>
             </ul>
-        </nav>
-    </header>
+        </div>
+    </div>
+</nav>
 
-    <main>
-        </main>
-
-    <script>
-        // JavaScript untuk menandai menu yang aktif
-        document.addEventListener('DOMContentLoaded', function() {
-            const path = window.location.pathname;
-            if (path === '/') {
-                document.getElementById('nav-home').classList.add('active');
-            } else if (path.includes('/picture')) {
-                document.getElementById('nav-picture').classList.add('active');
-            } else if (path.includes('/live_camera')) {
-                document.getElementById('nav-live-camera').classList.add('active');
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const path = window.location.pathname;
+        const applyActive = (id) => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.classList.add('text-white');
+                el.style.backgroundColor = '#455E14';
+                el.style.borderRadius = '6px';
             }
-        });
-    </script>
-
-</body>
-</html>
+        };
+        if (path === '/') {
+            applyActive('nav-home');
+        } else if (path.includes('/picture')) {
+            applyActive('nav-picture');
+        } else if (path.includes('/predict')) {
+            applyActive('nav-picture');
+        } else if (path.includes('/live_camera')) {
+            applyActive('nav-live-camera');
+        }
+    });
+</script>

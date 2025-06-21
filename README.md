@@ -1,4 +1,4 @@
-# 🗑️ Eco Lens – Garbage Classification Based on Image Data (CNN + Flask)
+# 🌱 Eco Lens: Smart Waste Classification with CNN & Flask
 
 **Eco Lens** is an AI-powered waste classification system that leverages **Computer Vision** and **Convolutional Neural Networks (CNN)** to categorize garbage images into five classes: **glass**, **metal**, **paper**, **plastic**, and **trash**.
 

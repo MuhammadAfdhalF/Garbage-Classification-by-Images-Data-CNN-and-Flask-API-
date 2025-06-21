@@ -131,21 +131,29 @@ The trained CNN model (`final_model_33.h5`) is deployed using a Flask web applic
 
 ### 📁 Project Structure
 
-project/
-├── static/
-│   └── uploads/              # Folder to store uploaded images
-│
-├── templates/                # HTML templates used by Flask
-│   ├── index.html            # Homepage with introduction and CTA
-│   ├── picture.html          # Upload image & display classification result
-│   ├── live_camera.html      # Real-time classification via webcam
-│   ├── cek.html              # Combined image + camera detection interface
-│   └── header.html           # Reusable navigation/header component
-│
-├── app.py                    # Main Flask application script
-├── final_model_33.h5         # Trained CNN model file
-├── requirements.txt          # Python dependency list
-└── start.sh                  # Optional script to run the app (Linux)
+- 📂 `static/uploads/`  
+  *Folder to store uploaded images*
+
+- 📂 `templates/`  
+  *HTML templates used by Flask:*
+  - 📄 `index.html` — Homepage with introduction and CTA  
+  - 📄 `picture.html` — Upload image & display classification result  
+  - 📄 `live_camera.html` — Real-time classification via webcam  
+  - 📄 `cek.html` — Combined image + camera detection interface  
+  - 📄 `header.html` — Reusable navigation/header component  
+
+- 📄 `app.py`  
+  *Main Flask application script*
+
+- 📄 `final_model_33.h5`  
+  *Trained CNN model file*
+
+- 📄 `requirements.txt`  
+  *Python dependency list*
+
+- 📄 `start.sh`  
+  *Optional script to run the app (Linux)*
+
 
 ### ⚙️ Key Features
 
@@ -158,18 +166,26 @@ project/
 > 💡 Simply run `python app.py`, open your browser, and start classifying waste images with **Eco Lens**!
 
 
-## ▶️ Route Overview (app.py):
-/ → Homepage for uploading images
+## ▶️ Route Overview (`app.py`)
 
-/predict → Handles image classification
+These are the key routes handled by the Flask backend:
 
-/picture → Displays uploaded image & result
+- 🌐 `/`  
+  *Homepage for uploading garbage images.*
 
-/live_camera → Access webcam for live prediction
+- 📤 `/predict`  
+  *Processes uploaded image and returns classification result.*
 
-/cek → Combined interface (image + camera)
+- 🖼️ `/picture`  
+  *Displays the uploaded image along with prediction result.*
 
-The app runs locally on port 5000 and is styled with Bootstrap.
+- 🎥 `/live_camera`  
+  *Enables real-time prediction using the device webcam.*
+
+- 🔀 `/cek`  
+  *Combined interface: upload + live camera detection in one page.*
+
+> ⚙️ The app runs **locally on port 5000** and is styled using **Bootstrap** for a clean and responsive UI.
 
 
 ## ⚙️ How to Run Locally
@@ -187,38 +203,32 @@ python app.py
 Then open your browser and go to:
 👉 http://127.0.0.1:3000/
 
-## 📷 Screenshots
-Add your screenshots by uploading them to GitHub and replacing the links above.
-
 ## 📈 Result & Accuracy
 
-- ✅ Final Accuracy: **~93%**
+The final model shows solid performance with the following metrics:
 
-#### 📊 Accuracy Curve:
-<p align="center">
-  <img src="ss/accuracy.png" alt="Accuracy Curve" width="600"/>
-</p>
+- ✅ **Training Accuracy:** 96%  
+- ✅ **Validation Accuracy:** 86%  
+- ✅ **Final Accuracy:** ~86% (on validation data)
 
-#### 📉 Loss Curve:
-<p align="center">
-  <img src="ss/loss.png" alt="Loss Curve" width="600"/>
-</p>
+---
 
+### 📉 Training Curves
 
+The plots below show how the model's performance evolved during training:
 
-✅ Final Accuracy: ~93% on validation data
-
-📉 Training loss and accuracy plots
 <p align="center">
   <img src="ss/accuracy.png" alt="Accuracy Curve" width="400" height="300"/>
   <img src="ss/loss.png" alt="Loss Curve" width="400" height="300"/>
 </p>
 
+- **Left:** Accuracy curve showing convergence between training and validation sets  
+- **Right:** Loss curve indicating decreasing error with each epoch
 
-📊 Confusion matrix for classification analysis
+---
 
 ## 🙋‍♂️ Author
 Muhammad Afdhal F
-👨‍💻 GitHub
-📧 Email: your.email@example.com
-📷 Instagram (optional) | 🌐 Website (optional
+👨‍💻 MUHAMMAD AFDHAL. F
+📧 Email: cuyafdal@gmail.com
+📷 Instagram (holla.cuy) 

@@ -14,11 +14,11 @@ Perfect for smart recycling, environmental education, and automated waste manage
 <table align="center">
   <tr>
     <td align="center">
-      <img src="ss/accuracy.png" alt="Homepage Eco Lens" width="400"/><br/>
+      <img src="ss/home.png" alt="Homepage Eco Lens" width="400"/><br/>
       <em>Homepage – users are introduced to Eco Lens with a CTA and mission statement.</em>
     </td>
     <td align="center">
-      <img src="ss/accuracy.png" alt="Picture Upload Page" width="400"/><br/>
+      <img src="ss/picture.png" alt="Picture Upload Page" width="400"/><br/>
       <em>Picture Page – users can upload an image to classify the waste type.</em>
     </td>
   </tr>
@@ -26,7 +26,7 @@ Perfect for smart recycling, environmental education, and automated waste manage
 
 <!-- Baris kedua: 1 gambar di tengah -->
 <p align="center">
-  <img src="ss/loss.png" alt="Live Camera Page" width="500"/><br/>
+  <img src="ss/live_camera.png" alt="Live Camera Page" width="500"/><br/>
   <em>Live Camera – users can detect trash type in real-time using their webcam.</em>
 </p>
 

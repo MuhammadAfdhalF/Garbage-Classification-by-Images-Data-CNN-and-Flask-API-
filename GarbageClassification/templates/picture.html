@@ -14,6 +14,8 @@
             color: #333;
         }
 
+
+
         .section-title {
             text-align: center;
             font-size: 1.5rem;
@@ -45,7 +47,7 @@
 
         .image-placeholder {
             width: 100%;
-            height: 400px;
+            height: 300px;
             background-color: #fff;
             border: 1px solid #ccc;
             display: flex;
@@ -59,10 +61,11 @@
         }
 
         .image-placeholder img {
-            max-height: 100%;
-            max-width: 100%;
-            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
+
 
         .btn-custom {
             background-color: #455E14;
@@ -90,12 +93,12 @@
 
     <main>
         <div class="container text-center">
-            <h2 class="section-title">Insert your image to Classification</h2>
+            <h2 class="section-title" style="font-size: 20px;">Insert your image to Classification</h2>
 
             <div class="row justify-content-center align-items-start text-center">
                 <!-- LEFT -->
                 <div class="col-md-5">
-                    <h5 class="mb-3 fw-bold">Insert Image</h5>
+                    <h5 class="mb-3 fw-bold" style="font-size: 18px;">Insert Image</h5>
                     <form method="POST" action="{{ url_for('predict_static_image') }}" enctype="multipart/form-data">
                         <div class="card-custom">
                             <div class="image-placeholder" id="preview">
@@ -122,7 +125,7 @@
                 </div>
                 <!-- RIGHT -->
                 <div class="col-md-5">
-                    <h5 class="mb-3 fw-bold">Classification Image</h5>
+                    <h5 class="mb-3 fw-bold" style="font-size: 18px;">Classification Image</h5>
                     <div class="card-custom">
                         <div class="image-placeholder">
                             {% if prediction and image_url %}

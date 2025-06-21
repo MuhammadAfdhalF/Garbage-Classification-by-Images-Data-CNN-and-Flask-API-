@@ -207,11 +207,13 @@ Then open your browser and go to:
 
 The final model shows solid performance with the following metrics:
 
-- ✅ **Training Accuracy:** 96%  
-- ✅ **Validation Accuracy:** 86%  
-- ✅ **Final Accuracy:** ~86% (on validation data)
+- ✅ **Training Accuracy:** 96.96%  
+- ✅ **Validation Accuracy:** 88.63%  
+- ✅ **Final Accuracy:** ~86% (on validation data)  
+- 📉 **Training Loss:** 0.1116  
+- 📉 **Validation Loss:** 0.4724  
+- 🧠 **Learning Rate:** 7.8125e-06  
 
----
 
 ### 📉 Training Curves
 
@@ -226,9 +228,12 @@ The plots below show how the model's performance evolved during training:
 - **Right:** Loss curve indicating decreasing error with each epoch
 
 ---
-
 ## 🙋‍♂️ Author
-Muhammad Afdhal F
-👨‍💻 MUHAMMAD AFDHAL. F
-📧 Email: cuyafdal@gmail.com
-📷 Instagram (holla.cuy) 
+
+**👨‍💻 Muhammad Afdhal F**
+
+- 📧 Email: [cuyafdal@gmail.com](mailto:cuyafdal@gmail.com)  
+- 📷 Instagram: [@holla.cuy](https://instagram.com/holla.cuy)  
+- 💼 LinkedIn: [Muhammad Afdhal F](https://id.linkedin.com/in/muhammad-afdhal-f-3b3317217)  
+- 🧠 Passionate in Mobile Dev, Web Dev, and AI
+- 🚀 Let’s build cool things together!

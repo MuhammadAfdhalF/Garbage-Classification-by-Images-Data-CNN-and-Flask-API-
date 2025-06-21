@@ -122,6 +122,9 @@ def live_predict():
             os.remove(filepath)
         return jsonify({'error': f'Failed to process live image: {str(e)}'}), 500
 
-# === RUN ===
+# # === RUN ===
+# if __name__ == '__main__':
+#     app.run(debug=True)
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=3000)

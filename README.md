@@ -42,7 +42,6 @@ Perfect for smart recycling, environmental education, and automated waste manage
 - [⚙️ How to Run Locally](#️how-to-run-locally)
 - [📷 Screenshots](#-screenshots)
 - [📈 Result & Accuracy](#-result--accuracy)
-- [📄 License](#-license)
 - [🙋‍♂️ Author](#-author)
 
 ---

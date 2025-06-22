@@ -140,7 +140,6 @@ The trained CNN model (`final_model_33.h5`) is deployed using a Flask web applic
   - 📄 `index.html` — Homepage with introduction and CTA  
   - 📄 `picture.html` — Upload image & display classification result  
   - 📄 `live_camera.html` — Real-time classification via webcam  
-  - 📄 `cek.html` — Combined image + camera detection interface  
   - 📄 `header.html` — Reusable navigation/header component  
 
 - 📄 `app.py`  

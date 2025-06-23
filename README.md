@@ -40,7 +40,6 @@ Perfect for smart recycling, environmental education, and automated waste manage
 - [🧠 Model Training](#️model-training)
 - [🌐 Flask Web App](#-flask-web-app)
 - [⚙️ How to Run Locally](#️how-to-run-locally)
-- [📷 Screenshots](#-screenshots)
 - [📈 Result & Accuracy](#-result--accuracy)
 - [🙋‍♂️ Author](#-author)
 

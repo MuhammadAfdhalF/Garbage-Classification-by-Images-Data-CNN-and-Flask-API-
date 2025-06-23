@@ -35,11 +35,11 @@ Perfect for smart recycling, environmental education, and automated waste manage
 ## 📚 Table of Contents
 
 - [📌 About the Project](#-about-the-project)
-- [🗃️ Dataset](#️dataset)
-- [🛠️ Technologies Used](#️technologies-used)
-- [🧠 Model Training](#️model-training)
+- [🗃️ Dataset](#️-dataset)
+- [🛠️ Technologies Used](#️-technologies-used)
+- [🧠 Model Training](#️-model-training)
 - [🌐 Flask Web App](#-flask-web-app)
-- [⚙️ How to Run Locally](#️how-to-run-locally)
+- [⚙️ How to Run Locally](#️-how-to-run-locally)
 - [📈 Result & Accuracy](#-result--accuracy)
 - [🙋‍♂️ Author](#-author)
 

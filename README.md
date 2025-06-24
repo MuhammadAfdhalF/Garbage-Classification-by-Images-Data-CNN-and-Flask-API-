@@ -9,7 +9,7 @@ Perfect for smart recycling, environmental education, and automated waste manage
 
 ---
 ## 📸 Demo
-
+ 
 <!-- Baris pertama: 2 gambar sejajar -->
 <table align="center">
   <tr>

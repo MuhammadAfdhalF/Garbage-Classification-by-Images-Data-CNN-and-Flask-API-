@@ -1,4 +1,4 @@
-# 🗑️ Eco Lens – Garbage Classification Based on Image Data (CNN + Flask)
+# 🌱 Eco Lens: Smart Waste Classification with CNN & Flask
 
 **Eco Lens** is an AI-powered waste classification system that leverages **Computer Vision** and **Convolutional Neural Networks (CNN)** to categorize garbage images into five classes: **glass**, **metal**, **paper**, **plastic**, and **trash**.
 
@@ -9,16 +9,16 @@ Perfect for smart recycling, environmental education, and automated waste manage
 
 ---
 ## 📸 Demo
-
+ 
 <!-- Baris pertama: 2 gambar sejajar -->
 <table align="center">
   <tr>
     <td align="center">
-      <img src="ss/accuracy.png" alt="Homepage Eco Lens" width="400"/><br/>
+      <img src="ss/home.png" alt="Homepage Eco Lens" width="400"/><br/>
       <em>Homepage – users are introduced to Eco Lens with a CTA and mission statement.</em>
     </td>
     <td align="center">
-      <img src="ss/accuracy.png" alt="Picture Upload Page" width="400"/><br/>
+      <img src="ss/picture.png" alt="Picture Upload Page" width="400"/><br/>
       <em>Picture Page – users can upload an image to classify the waste type.</em>
     </td>
   </tr>
@@ -26,24 +26,23 @@ Perfect for smart recycling, environmental education, and automated waste manage
 
 <!-- Baris kedua: 1 gambar di tengah -->
 <p align="center">
-  <img src="ss/loss.png" alt="Live Camera Page" width="500"/><br/>
+  <img src="ss/live_camera.png" alt="Live Camera Page" width="500"/><br/>
   <em>Live Camera – users can detect trash type in real-time using their webcam.</em>
 </p>
 
+---
 
 ## 📚 Table of Contents
 
 - [📌 About the Project](#-about-the-project)
-- [🗃️ Dataset](#️dataset)
-- [🛠️ Technologies Used](#️technologies-used)
-- [🧠 Model Training](#️model-training)
+- [🗃️ Dataset](#️-dataset)
+- [🛠️ Technologies Used](#️-technologies-used)
+- [🧠 Model Training](#-model-training)
 - [🌐 Flask Web App](#-flask-web-app)
-- [⚙️ How to Run Locally](#️how-to-run-locally)
-- [📷 Screenshots](#-screenshots)
+- [⚙️ How to Run Locally](#️-how-to-run-locally)
 - [📈 Result & Accuracy](#-result--accuracy)
-- [📄 License](#-license)
-- [🙋‍♂️ Author](#-author)
-
+- [🙋‍♂️ Author](#%EF%B8%8F-author)
+ 
 ---
 
 ## 📌 About the Project
@@ -57,7 +56,6 @@ By combining **Computer Vision** and **Convolutional Neural Networks (CNN)**, th
 Just one photo, and the system can instantly recognize the type of waste — making sorting smarter, faster, and more scalable for real-world environmental impact.
 
 > ♻️ Let AI help us build a cleaner future — one image at a time.
-
 
 ---
 
@@ -125,6 +123,8 @@ The Eco Lens training pipeline was carefully designed to ensure the model learns
 
 > ✅ **The final model** demonstrated strong performance, achieving **96% training accuracy** and **88% validation accuracy** in the third phase — making it well-suited for real-world garbage classification scenarios.
 
+---
+
 ## 🌐 Flask Web App
 
 The trained CNN model (`final_model_33.h5`) is deployed using a Flask web application with **modular HTML templates** and **Bootstrap styling** for a clean and responsive user experience.
@@ -139,7 +139,6 @@ The trained CNN model (`final_model_33.h5`) is deployed using a Flask web applic
   - 📄 `index.html` — Homepage with introduction and CTA  
   - 📄 `picture.html` — Upload image & display classification result  
   - 📄 `live_camera.html` — Real-time classification via webcam  
-  - 📄 `cek.html` — Combined image + camera detection interface  
   - 📄 `header.html` — Reusable navigation/header component  
 
 - 📄 `app.py`  
@@ -165,6 +164,7 @@ The trained CNN model (`final_model_33.h5`) is deployed using a Flask web applic
 
 > 💡 Simply run `python app.py`, open your browser, and start classifying waste images with **Eco Lens**!
 
+---
 
 ## ▶️ Route Overview (`app.py`)
 
@@ -187,7 +187,6 @@ These are the key routes handled by the Flask backend:
 
 > ⚙️ The app runs **locally on port 5000** and is styled using **Bootstrap** for a clean and responsive UI.
 
-
 ## ⚙️ How to Run Locally
 
 ### 1. Clone repo
@@ -199,9 +198,10 @@ pip install -r requirements.txt
 ### 3. Run Flask App
 python app.py
 
-
 Then open your browser and go to:
 👉 http://127.0.0.1:3000/
+
+---
 
 ## 📈 Result & Accuracy
 
@@ -214,6 +214,7 @@ The final model shows solid performance with the following metrics:
 - 📉 **Validation Loss:** 0.4724  
 - 🧠 **Learning Rate:** 7.8125e-06  
 
+---
 
 ### 📉 Training Curves
 
@@ -228,6 +229,7 @@ The plots below show how the model's performance evolved during training:
 - **Right:** Loss curve indicating decreasing error with each epoch
 
 ---
+
 ## 🙋‍♂️ Author
 
 **👨‍💻 Muhammad Afdhal F**

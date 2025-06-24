@@ -1,39 +1,39 @@
-# Gunakan image dasar Python
-# Sesuaikan versi Python jika Anda menggunakan versi tertentu (misal python:3.9-slim-buster)
-FROM python:3.9-slim-buster
+# Gunakan base image Python yang sesuai. Sesuaikan versi Python jika diperlukan.
+# Disarankan menggunakan versi spesifik yang kamu pakai (misal: python:3.9-slim)
+FROM python:3.9-slim
 
-# Instal Git LFS
-# Ini akan memastikan Git LFS client tersedia di dalam container
-RUN apt-get update && apt-get install -y git-lfs && rm -rf /var/lib/apt/lists/*
+# --- BAGIAN BARU: Instalasi Git LFS ---
+# Perbarui daftar paket dan instal git-lfs
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends git-lfs && \
+    git lfs install && \
+    rm -rf /var/lib/apt/lists/*
+# -----------------------------------
 
-# Set direktori kerja di dalam container.
-# Ini harus sama dengan direktori build di Railway (GarbageClassification/)
-WORKDIR /app/GarbageClassification
+# Set working directory di dalam container
+WORKDIR /app
 
-# Salin semua file dari repositori lokal Anda ke direktori kerja di dalam container.
-# Perhatikan titik pertama (.) yang berarti "direktori saat ini di host" (yaitu root repositori Anda)
-# dan titik kedua (.) yang berarti "direktori kerja di container"
-# Ini akan menyalin seluruh isi folder GarbageClassification/ dan juga .git/
-COPY . /app/GarbageClassification
-
-# Karena kita menyalin seluruh repositori termasuk .git/,
-# kita perlu memastikan Git LFS mengunduh file sebenarnya
-# LFS install akan mengaktifkan filtering LFS
-# LFS pull akan mengunduh file besar yang ditunjuk oleh pointer LFS
-RUN git lfs install --local && git lfs pull
-
-# Instal dependensi Python
-# Pastikan requirements.txt ada di dalam GarbageClassification/
+# Copy requirements.txt dan install dependencies terlebih dahulu
+# Ini memanfaatkan Docker cache layer jika requirements.txt tidak berubah
+COPY GarbageClassification/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Atur variabel lingkungan yang diperlukan oleh Flask
-# Pastikan app.py adalah file utama Flask Anda
-ENV FLASK_APP=app.py
+# Copy sisa kode aplikasi dari subfolder GarbageClassification ke dalam container
+COPY GarbageClassification/ .
 
-# Ekspos port yang akan didengarkan aplikasi Flask Anda
-# Railway akan menggunakan ini untuk merutekan traffic
-EXPOSE 5000
+# Copy folder ss (jika ada aset statis atau gambar yang diperlukan oleh aplikasi)
+COPY ss/ ./ss/
 
-# Perintah untuk menjalankan aplikasi Flask Anda
-# Ini akan dieksekusi saat container dijalankan
-CMD ["python3", "app.py"]
+# Copy file start.sh
+COPY GarbageClassification/start.sh .
+
+# Berikan izin eksekusi pada start.sh
+RUN chmod +x start.sh
+
+# Expose port yang digunakan aplikasi kamu (biasanya 5000 untuk Flask, atau 7860 untuk HF Spaces)
+# Penting: Pastikan ini sesuai dengan port yang di-listen oleh aplikasi Python kamu di app.py / start.sh
+EXPOSE 7860
+
+# Command untuk menjalankan aplikasi.
+# Pastikan start.sh menjalankan app.py dengan benar.
+CMD ["./start.sh"]

@@ -1,4 +1,5 @@
-flask
-tensorflow
-pillow
-numpy
+Flask==2.3.2 # Versi yang direkomendasikan untuk stabilitas
+numpy==1.24.3 # Versi yang direkomendasikan untuk stabilitas
+Pillow==9.5.0 # Versi yang direkomendasikan untuk stabilitas
+tensorflow==2.10.0 # Pastikan versi ini kompatibel dengan model .h5 Anda.
+# Jika Anda hanya ingin menggunakan CPU, ganti 'tensorflow' dengan 'tensorflow-cpu' di sini.

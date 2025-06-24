@@ -17,15 +17,21 @@ os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0' # Menekan warning specific dari Tensor
 # tf.get_logger().setLevel(logging.ERROR)
 # --- AKHIR KONFIGURASI TENSORFLOW ---
 
-app = Flask(__name__)
+app = Flask(__name__,
+            template_folder=os.path.join(os.path.dirname(__file__), 'templates'),
+            static_folder=os.path.join(os.path.dirname(__file__), 'static'))
 
 # Path folder untuk menyimpan gambar upload
-UPLOAD_FOLDER = 'static/uploads'
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+# Pastikan folder static/uploads ada di dalam GarbageClassification/
+UPLOAD_FOLDER_RELATIVE = 'static/uploads'
+UPLOAD_FOLDER_ABSOLUTE = os.path.join(os.path.dirname(__file__), UPLOAD_FOLDER_RELATIVE)
+os.makedirs(UPLOAD_FOLDER_ABSOLUTE, exist_ok=True)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER_ABSOLUTE
 
 # Load model
-model = tf.keras.models.load_model("final_model_33.h5")
+# Pastikan final_model_33.h5 ada di dalam folder yang sama dengan app.py
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "final_model_33.h5")
+model = tf.keras.models.load_model(MODEL_PATH)
 target_size = (224, 224)
 
 # Mapping output ke nama label
@@ -50,6 +56,7 @@ def picture():
 @app.route('/live_camera')
 def live_camera():
     return render_template('live_camera.html')
+
 # Endpoint untuk form upload di picture.html
 @app.route('/predict', methods=['POST'])
 def predict_static_image():
@@ -86,9 +93,12 @@ def predict_static_image():
         class_name = waste_labels.get(class_index, "Unknown")
 
         print("✅ Prediksi berhasil:", class_name)
+        # Untuk URL gambar yang ditampilkan di HTML, gunakan jalur relatif dari root static
+        display_image_url = os.path.join(UPLOAD_FOLDER_RELATIVE, filename).replace('\\', '/') # Mengganti backslash untuk URL
         print("🖼️ Gambar disimpan di:", filepath)
 
-        return render_template('picture.html', prediction=class_name, image_url=filepath)
+
+        return render_template('picture.html', prediction=class_name, image_url=display_image_url)
 
     except Exception as e:
         print(f"❌ Error saat memproses gambar: {e}")
@@ -123,7 +133,7 @@ def live_predict():
         class_index = np.argmax(pred) + 1
         class_name = waste_labels.get(class_index, "Unknown")
 
-        os.remove(filepath)
+        os.remove(filepath) # Hapus gambar setelah diproses
         return jsonify({'prediction': class_name})
 
     except Exception as e:
@@ -133,6 +143,6 @@ def live_predict():
         return jsonify({'error': f'Failed to process live image: {str(e)}'}), 500
 
 if __name__ == '__main__':
-    # Dapatkan port dari variabel lingkungan Railway
-    port = int(os.environ.get('PORT', 5000)) # 5000 sebagai fallback untuk lokal
+    # Dapatkan port dari variabel lingkungan, default ke 7860 untuk Hugging Face Spaces
+    port = int(os.environ.get('PORT', 7860)) 
     app.run(debug=False, host='0.0.0.0', port=port)

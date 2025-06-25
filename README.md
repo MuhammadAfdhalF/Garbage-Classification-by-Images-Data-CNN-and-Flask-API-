@@ -9,7 +9,8 @@ Perfect for smart recycling, environmental education, and automated waste manage
 
 ---
 ## 📸 Demo
- 
+
+ https://huggingface.co/spaces/acuyy/eco_lens2
 <!-- Baris pertama: 2 gambar sejajar -->
 <table align="center">
   <tr>
